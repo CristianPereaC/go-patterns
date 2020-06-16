@@ -5,7 +5,7 @@ import "fmt"
 /* Dependencies */
 type ctx struct{}
 
-var UserDao UserDaoInstance
+var UserDao UserDaoInterface
 
 /* Instance build */
 func init() {

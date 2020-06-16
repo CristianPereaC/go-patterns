@@ -1,14 +1,14 @@
 package service
 
 import "fmt"
-import "../dao"
+import "github.com/mercadolibre/go-patterns/dao"
 
 /* Dependencies */
 type ctx struct {
 	UsersDao dao.UserDaoInterface
 }
 
-var UserService UserServiceInstance
+var UserService UserServiceInterface
 
 /* Instance build */
 func init() {

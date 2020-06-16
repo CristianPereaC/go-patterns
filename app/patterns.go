@@ -1,13 +1,13 @@
 package main
 
 import (
-	"../service"
+	"github.com/mercadolibre/go-patterns/service"
 )
 
-var userService service.UserServiceInstance
+var userService = service.UserService
 
 func init() {
-	userService = service.NewUserServiceInstance()
+
 }
 
 func main() {
