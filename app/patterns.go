@@ -4,7 +4,7 @@ import (
 	"../service"
 )
 
-var userService service.UserServiceImpl
+var userService service.UserServiceInstance
 
 func init() {
 	userService = service.NewUserServiceInstance()

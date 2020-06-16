@@ -5,32 +5,32 @@ import "fmt"
 /* Dependencies */
 type ctx struct{}
 
-var UserDaoInstance UserDaoImpl
+var UserDao UserDaoInstance
 
 /* Instance build */
 func init() {
-	UserDaoInstance = NewUserDaoInstance()
+	UserDao = NewUserDaoInstance()
 }
 
-func NewUserDaoInstance() UserDaoImpl {
-	return UserDaoImpl{
+func NewUserDaoInstance() UserDaoInstance {
+	return UserDaoInstance{
 		ctx{},
 	}
 }
 
 /* Dao definition */
-type UserDao interface {
+type UserDaoInterface interface {
 	CreateUserDB()
 	UpdateUserDB()
 }
 
-type UserDaoImpl struct {
+type UserDaoInstance struct {
 	Ctx ctx
 }
 
-func (u UserDaoImpl) CreateUserDB() {
+func (u UserDaoInstance) CreateUserDB() {
 	fmt.Println("DB USER CREATED")
 }
-func (u UserDaoImpl) UpdateUserDB() {
+func (u UserDaoInstance) UpdateUserDB() {
 	fmt.Println("DB USER UPDATED")
 }

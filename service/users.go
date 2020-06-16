@@ -5,40 +5,40 @@ import "../dao"
 
 /* Dependencies */
 type ctx struct {
-	UsersDao dao.UserDao
+	UsersDao dao.UserDaoInterface
 }
 
-var UserServiceInstance UserServiceImpl
+var UserService UserServiceInstance
 
 /* Instance build */
 func init() {
-	UserServiceInstance = NewUserServiceInstance()
+	UserService = NewUserServiceInstance()
 }
 
-func NewUserServiceInstance() UserServiceImpl {
-	return UserServiceImpl{
+func NewUserServiceInstance() UserServiceInstance {
+	return UserServiceInstance{
 		ctx{
-			UsersDao: dao.UserDaoInstance,
+			UsersDao: dao.UserDao,
 		},
 	}
 }
 
 /* Service definition */
-type UserService interface {
+type UserServiceInterface interface {
 	CreateUser()
 	UpdateUser()
 }
 
-type UserServiceImpl struct {
+type UserServiceInstance struct {
 	Ctx ctx
 }
 
-func (u UserServiceImpl) CreateUser() {
+func (u UserServiceInstance) CreateUser() {
 	u.Ctx.UsersDao.CreateUserDB()
 	fmt.Println("service done")
 }
 
-func (u UserServiceImpl) UpdateUser() {
+func (u UserServiceInstance) UpdateUser() {
 	u.Ctx.UsersDao.UpdateUserDB()
 	fmt.Println("service done")
 }
