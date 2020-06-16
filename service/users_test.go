@@ -5,14 +5,29 @@ import (
 	"testing"
 )
 
+type UserDaoImplMock struct {
+	MockCreateUserDB func()
+	MockUpdateUserDB func()
+}
+
+func (u UserDaoImplMock) CreateUserDB() {
+	u.MockCreateUserDB()
+}
+func (u UserDaoImplMock) UpdateUserDB() {
+	u.MockUpdateUserDB()
+}
+
 func TestUserServiceImpl_CreateUser(t *testing.T) {
 
-	var UserServiceInstance = GetUserServiceInstance()
+	var UserServiceInstance = NewUserServiceInstance()
+	var userDaoImplMock UserDaoImplMock
 
-	UserServiceInstance.Options.UsersDao.CreateUserDB = func() {
+	userDaoImplMock.MockCreateUserDB = func() {
 		fmt.Println("Mocked response")
 		return
 	}
 
-	UserServiceInstance.CreateUser(UserServiceInstance.Options)
+	UserServiceInstance.Ctx.UsersDao = userDaoImplMock
+
+	UserServiceInstance.CreateUser()
 }

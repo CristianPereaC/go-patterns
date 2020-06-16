@@ -4,9 +4,13 @@ import (
 	"../service"
 )
 
-var userService = service.GetUserServiceInstance()
+var userService service.UserServiceImpl
+
+func init() {
+	userService = service.NewUserServiceInstance()
+}
 
 func main() {
 
-	userService.CreateUser(userService.Options)
+	userService.CreateUser()
 }

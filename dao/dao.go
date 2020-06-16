@@ -2,21 +2,35 @@ package dao
 
 import "fmt"
 
-func GetUserDaoInstance() UserDaoImpl {
+/* Dependencies */
+type ctx struct{}
+
+var UserDaoInstance UserDaoImpl
+
+/* Instance build */
+func init() {
+	UserDaoInstance = NewUserDaoInstance()
+}
+
+func NewUserDaoInstance() UserDaoImpl {
 	return UserDaoImpl{
-		CreateUserDB,
-		UpdateUserDB,
+		ctx{},
 	}
 }
 
-type UserDaoImpl struct {
-	CreateUserDB func()
-	UpdateUserDB func()
+/* Dao definition */
+type UserDao interface {
+	CreateUserDB()
+	UpdateUserDB()
 }
 
-func CreateUserDB() {
+type UserDaoImpl struct {
+	Ctx ctx
+}
+
+func (u UserDaoImpl) CreateUserDB() {
 	fmt.Println("DB USER CREATED")
 }
-func UpdateUserDB() {
+func (u UserDaoImpl) UpdateUserDB() {
 	fmt.Println("DB USER UPDATED")
 }

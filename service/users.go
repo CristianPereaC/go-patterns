@@ -3,35 +3,42 @@ package service
 import "fmt"
 import "../dao"
 
-type options struct {
-	UsersDao dao.UserDaoImpl
+/* Dependencies */
+type ctx struct {
+	UsersDao dao.UserDao
 }
 
-func GetUserServiceInstance() UserServiceImpl {
+var UserServiceInstance UserServiceImpl
 
-	var dependencies = options{
-		UsersDao: dao.GetUserDaoInstance(),
-	}
+/* Instance build */
+func init() {
+	UserServiceInstance = NewUserServiceInstance()
+}
 
+func NewUserServiceInstance() UserServiceImpl {
 	return UserServiceImpl{
-		CreateUser,
-		UpdateUser,
-		dependencies,
+		ctx{
+			UsersDao: dao.UserDaoInstance,
+		},
 	}
+}
+
+/* Service definition */
+type UserService interface {
+	CreateUser()
+	UpdateUser()
 }
 
 type UserServiceImpl struct {
-	CreateUser func(options)
-	UpdateUser func(options)
-	Options    options
+	Ctx ctx
 }
 
-func CreateUser(ops options) {
-	ops.UsersDao.CreateUserDB()
-	fmt.Println("service USER CREATED")
+func (u UserServiceImpl) CreateUser() {
+	u.Ctx.UsersDao.CreateUserDB()
+	fmt.Println("service done")
 }
 
-func UpdateUser(ops options) {
-	ops.UsersDao.UpdateUserDB()
-	fmt.Println("service USER UPDATED")
+func (u UserServiceImpl) UpdateUser() {
+	u.Ctx.UsersDao.UpdateUserDB()
+	fmt.Println("service done")
 }
