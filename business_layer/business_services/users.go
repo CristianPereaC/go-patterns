@@ -1,10 +1,9 @@
 package business_services
 
 import (
-	"github.com/Cristien/go-patterns/web/web_views"
-	"github.com/Cristien/go-patterns/web/web_request"
 	"github.com/Cristien/go-patterns/business_layer/business_domain"
-	"github.com/Cristien/go-patterns/business_layer/business_dto"
+	"github.com/Cristien/go-patterns/web/web_request"
+	"github.com/Cristien/go-patterns/web/web_views"
 )
 
 const (
@@ -26,7 +25,7 @@ func (u userServiceImpl) CreateUser(request web_request.CreateUserRequest) (id s
 	//Generar objeto de negocio - obtención de id
 	user := business_domain.NewUser(request)
 	//convertir a dto
-	userDbDto := business_dto.NewUserDb(user)
+	userDbDto := business_domain.NewUserDb(user)
 	//persistir
 	userDb, err := u.userDao.SaveUser(userDbDto)
 

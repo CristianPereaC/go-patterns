@@ -55,3 +55,15 @@ func NewUserFromDbDto(userDbDto business_dto.UserDb) User{
 		FullName: userDbDto.FirstName + userDbDto.LastName,
 	}
 }
+
+func NewUserDb(user User) business_dto.UserDb{
+	return business_dto.UserDb{
+		Id: user.Id,
+		FirstName: user.FirstName,
+		LastName: user.LastName,
+		Email: user.Email,
+		Password: user.Password,
+		CreationDate: user.CreationDate,
+		LastUpdateDate: user.LastUpdateDate,
+	}
+}

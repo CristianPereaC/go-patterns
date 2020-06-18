@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/Cristien/go-patterns/business_layer/business_services"
 	"github.com/Cristien/go-patterns/dao/memory_dao"
 	"github.com/Cristien/go-patterns/web/http_handlers"
@@ -17,5 +18,5 @@ func init() {
 }
 
 func main() {
-
+	fmt.Println("a")
 }
