@@ -11,18 +11,18 @@ const(
 )
 
 /* Dao definition */
-type userMemoryDaoImpl struct {
+type userDaoMemoryImpl struct {
 	container map[string]business_dto.UserDb
 }
 
 /*constructor*/
-func NewUserDaoImplInstance() userMemoryDaoImpl {
-	return userMemoryDaoImpl{
+func NewUserDaoImplInstance() userDaoMemoryImpl {
+	return userDaoMemoryImpl{
 		container: map[string]business_dto.UserDb{},
 	}
 }
 
-func (u userMemoryDaoImpl) SaveUser(userDb business_dto.UserDb) (*business_dto.UserDb, error){
+func (u userDaoMemoryImpl) SaveUser(userDb business_dto.UserDb) (*business_dto.UserDb, error){
 	if !userDb.IsValid() {
 		return nil, errors.New(INVALID_USER_DB_DATA)
 	}
@@ -35,7 +35,7 @@ func (u userMemoryDaoImpl) SaveUser(userDb business_dto.UserDb) (*business_dto.U
 	return &userDb, nil
 }
 
-func (u userMemoryDaoImpl) GetUser(id string) (*business_dto.UserDb){
+func (u userDaoMemoryImpl) GetUser(id string) (*business_dto.UserDb){
 	if persistedUderDb, ok := u.container[id]; ok{
 		return &persistedUderDb
 	}

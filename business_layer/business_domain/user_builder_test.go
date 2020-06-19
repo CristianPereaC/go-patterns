@@ -1,6 +1,7 @@
 package business_domain
 
 import (
+	"github.com/Cristien/go-patterns/business_layer/business_dto"
 	"github.com/Cristien/go-patterns/web/web_views"
 	"github.com/Cristien/go-patterns/web/web_request"
 	"github.com/stretchr/testify/assert"
@@ -67,4 +68,45 @@ func TestNewUser(t *testing.T) {
 	assert.Equal(t, "Perez", user.LastName)
 	assert.Equal(t, "juan@perez@gmail.com", user.Email)
 	assert.Equal(t, "123425645343", user.Password)
+}
+
+
+func TestNewUserFromDbDto(t *testing.T) {
+
+	userDb := business_dto.UserDb{
+		Id: "123425364",
+		FirstName: "Juan",
+		LastName: "Perez",
+		Email: "juan@perez@gmail.com",
+		Password: "123425645343",
+		Version: 3,
+	}
+
+	user := NewUserFromDbDto(userDb)
+
+	assert.Equal(t, "123425364", user.Id)
+	assert.Equal(t, "Juan", user.FirstName)
+	assert.Equal(t, "Perez", user.LastName)
+	assert.Equal(t, "juan@perez@gmail.com", user.Email)
+	assert.Equal(t, "123425645343", user.Password)
+}
+
+func TestNewUserDb(t *testing.T) {
+
+	user := User{
+		Id: "123425364",
+		FirstName: "Juan",
+		LastName: "Perez",
+		Email: "juan@perez@gmail.com",
+		Password: "123425645343",
+	}
+
+	userDb := NewUserDb(user)
+
+	assert.Equal(t, "123425364", userDb.Id)
+	assert.Equal(t, "Juan", userDb.FirstName)
+	assert.Equal(t, "Perez", userDb.LastName)
+	assert.Equal(t, "juan@perez@gmail.com", userDb.Email)
+	assert.Equal(t, "123425645343", userDb.Password)
+	assert.Equal(t, 0, userDb.Version)
 }

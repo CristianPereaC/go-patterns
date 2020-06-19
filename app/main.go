@@ -1,9 +1,9 @@
 package main
 
 import (
-	"fmt"
 	"github.com/Cristien/go-patterns/business_layer/business_services"
 	"github.com/Cristien/go-patterns/dao/memory_dao"
+	"github.com/Cristien/go-patterns/routing"
 	"github.com/Cristien/go-patterns/web/http_handlers"
 )
 
@@ -13,10 +13,7 @@ var(
 	userHandler = http_handlers.NewuserHandler(usersService)
 )
 
-func init() {
-
-}
-
 func main() {
-	fmt.Println("a")
+	routing.MapUserResourceHandlers(userHandler)
+	routing.Router.Run()
 }
