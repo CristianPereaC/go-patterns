@@ -6,7 +6,11 @@ import (
 )
 
 func main() {
+
 	context := app_context.BuildAppContext()
-	routing.MapUserResourceHandlers(context.HandlerContext.UserHandler)
-	routing.Router.Run()
+
+	apiHandlers := routing.NewApiHandlers()
+	apiHandlers.SetUserHandler(&context.HandlerContext.UserHandler)
+
+	routing.StartApiRouter(apiHandlers)
 }

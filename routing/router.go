@@ -3,16 +3,18 @@ package routing
 import "github.com/gin-gonic/gin"
 
 var (
-	Router *gin.Engine
+	router *gin.Engine
 )
 
-func init(){
-	Router = gin.Default()
+func StartApiRouter(apiHandlers apiHandlers){
+	router = gin.Default()
+	mapUserResourceHandlers(*apiHandlers.userHandler)
+	router.Run()
 }
 
 
-func MapUserResourceHandlers(handler UserHandler){
-	Router.POST("/users", handler.CreateUser)
-	Router.GET("/users/:id/private", handler.GetPrivateUser)
-	Router.GET("/users/:id/public", handler.GetPublicUser)
+func mapUserResourceHandlers(handler UserHandler){
+	router.POST("/users", handler.CreateUser)
+	router.GET("/users/:id/private", handler.GetPrivateUser)
+	router.GET("/users/:id/public", handler.GetPublicUser)
 }
