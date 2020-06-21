@@ -24,17 +24,44 @@ func (u userHandlerImpl) CreateUser(c *gin.Context){
 		c.JSON(http.StatusBadRequest, err)
 	}
 
-	if _, err := u.userService.CreateUser(*request); err != nil {
+	userId, err := u.userService.CreateUser(*request);
+
+	if err != nil {
 		c.JSON(http.StatusInternalServerError, err)
 	}
 
-	c.Status(http.StatusCreated)
+	id := struct {
+		Id string `json:"id"`
+	}{
+		Id: userId,
+	}
+
+	c.JSON(http.StatusCreated, id)
 }
 func (u userHandlerImpl) GetPrivateUser(c *gin.Context){
 	id := c.Param("id")
 
+	if len(id) > 0 {
+		c.Status(http.StatusBadRequest)
+	}
+
+	if dto := u.userService.GetPrivateUser(id); dto != nil {
+		c.JSON(http.StatusOK, dto)
+	}
+
+	c.Status(http.StatusNotFound)
 
 }
 func (u userHandlerImpl) GetPublicUser(c *gin.Context){
+	id := c.Param("id")
 
+	if len(id) > 0 {
+		c.Status(http.StatusBadRequest)
+	}
+
+	if dto := u.userService.GetPublicUser(id); dto != nil {
+		c.JSON(http.StatusOK, dto)
+	}
+
+	c.Status(http.StatusNotFound)
 }

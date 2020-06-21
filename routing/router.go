@@ -13,7 +13,7 @@ func init(){
 
 
 func MapUserResourceHandlers(handler UserHandler){
-	Router.POST("/user", handler.CreateUser)
-	Router.GET("/user/:id/private", handler.GetPrivateUser)
-	Router.GET("/user/:id/public", handler.GetPublicUser)
+	Router.POST("/users", handler.CreateUser)
+	Router.GET("/users/:id/private", handler.GetPrivateUser)
+	Router.GET("/users/:id/public", handler.GetPublicUser)
 }
