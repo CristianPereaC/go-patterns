@@ -8,17 +8,17 @@ import (
 )
 
 type appContext struct{
-	DaoContext     daoContext
-	ServiceContext serviceContext
-	HandlerContext handlerContext
+	DaoContext     *daoContext
+	ServiceContext *serviceContext
+	HandlerContext *handlerContext
 }
 
 func BuildAppContext() appContext{
-	appContext := appContext{}
+	appContext := new(appContext)
 	appContext.buildDaos()
 	appContext.buildServices()
 	appContext.buildHandlers()
-	return appContext
+	return *appContext
 }
 
 type daoContext struct {
@@ -33,22 +33,20 @@ type handlerContext struct {
 	UserHandler routing.UserHandler
 }
 
-func (c appContext) buildDaos(){
-	c.DaoContext = daoContext{
-		UsersDao: memory_dao.NewUserDaoImplInstance(),
-	}
+func (c *appContext) buildDaos(){
+	c.DaoContext = new(daoContext)
+	c.DaoContext.UsersDao = memory_dao.NewUserDaoImplInstance()
 }
 
-func (c appContext) buildServices(){
-	c.ServiceContext = serviceContext{
-		UserService: business_services.NewUserServiceInstance(c.DaoContext.UsersDao),
-	}
+func (c *appContext) buildServices(){
+	c.ServiceContext = new(serviceContext)
+	c.ServiceContext.UserService = business_services.NewUserServiceInstance(c.DaoContext.UsersDao)
 }
 
-func (c appContext) buildHandlers(){
-	c.HandlerContext = handlerContext{
-		UserHandler: http_handlers.NewuserHandler(c.ServiceContext.UserService),
-	}
+func (c *appContext) buildHandlers(){
+	c.HandlerContext = new(handlerContext)
+	c.HandlerContext.UserHandler = http_handlers.NewuserHandler(c.ServiceContext.UserService)
+
 }
 
 
