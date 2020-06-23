@@ -7,6 +7,12 @@ import (
 	"testing"
 )
 
+/**
+cada test podría levantar su contexto
+cada test puede reemplazar una parte del contexto para mockear cierta parte del contexto
+y hacer test de integración entre ciertas capas
+ */
+
 func TestCreateUserUserService(t *testing.T){
 
 	service := app.Context.ServiceContext.UserService

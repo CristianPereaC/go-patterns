@@ -2,6 +2,7 @@ package routing
 
 import (
 	"github.com/gin-gonic/gin"
+	"net/http"
 )
 
 type AppRouter struct {
@@ -22,4 +23,8 @@ func (appRouter *AppRouter) MapUserResourceHandlers(handler UserHandler){
 
 func (appRouter *AppRouter) RunAppRouter() {
 	appRouter.router.Run()
+}
+
+func (appRouter *AppRouter) ServeHTTP(req *http.Request, w http.ResponseWriter) {
+	appRouter.router.ServeHTTP(w, req)
 }

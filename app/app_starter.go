@@ -4,11 +4,15 @@ var Context appContext
 
 func StartApplication(){
 	BuildAppContext()
-	Context.AppRouter.RunAppRouter()
+	startAppRouter()
 }
 
 func BuildAppContext(){
 	Context = newAppContext()
+}
+
+func startAppRouter(){
+	Context.AppRouter.RunAppRouter()
 }
 
 
