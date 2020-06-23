@@ -4,19 +4,22 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-var (
+type AppRouter struct {
 	router *gin.Engine
-)
-
-func StartApiRouter(apiHandlers apiHandlers){
-	router = gin.Default()
-	mapUserResourceHandlers(*apiHandlers.userHandler)
-	router.Run()
 }
 
+func NewAppRouter() *AppRouter{
+	return &AppRouter{
+		router: gin.Default(),
+	}
+}
 
-func mapUserResourceHandlers(handler UserHandler){
-	router.POST("/users", handler.CreateUser)
-	router.GET("/users/:id/private", handler.GetPrivateUser)
-	router.GET("/users/:id/public", handler.GetPublicUser)
+func (appRouter *AppRouter) MapUserResourceHandlers(handler UserHandler){
+	appRouter.router.POST("/users", handler.CreateUser)
+	appRouter.router.GET("/users/:id/private", handler.GetPrivateUser)
+	appRouter.router.GET("/users/:id/public", handler.GetPublicUser)
+}
+
+func (appRouter *AppRouter) RunAppRouter() {
+	appRouter.router.Run()
 }

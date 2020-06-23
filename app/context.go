@@ -1,4 +1,4 @@
-package app_context
+package app
 
 import (
 	"github.com/Cristien/go-patterns/business_layer/business_services"
@@ -7,17 +7,19 @@ import (
 	"github.com/Cristien/go-patterns/web/http_handlers"
 )
 
-type appContext struct{
+type appContext struct {
 	DaoContext     *daoContext
 	ServiceContext *serviceContext
 	HandlerContext *handlerContext
+	AppRouter      *routing.AppRouter
 }
 
-func BuildAppContext() appContext{
+func newAppContext() appContext{
 	appContext := new(appContext)
 	appContext.buildDaos()
 	appContext.buildServices()
 	appContext.buildHandlers()
+	appContext.buildAppRouter()
 	return *appContext
 }
 
@@ -46,7 +48,11 @@ func (c *appContext) buildServices(){
 func (c *appContext) buildHandlers(){
 	c.HandlerContext = new(handlerContext)
 	c.HandlerContext.UserHandler = http_handlers.NewuserHandler(c.ServiceContext.UserService)
+}
 
+func (c *appContext) buildAppRouter(){
+	c.AppRouter = routing.NewAppRouter()
+	c.AppRouter.MapUserResourceHandlers(c.HandlerContext.UserHandler)
 }
 
 
