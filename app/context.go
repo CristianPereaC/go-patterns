@@ -14,7 +14,7 @@ type appContext struct {
 	AppRouter      *routing.AppRouter
 }
 
-func newAppContext() appContext{
+func NewAppContext() appContext{
 	appContext := new(appContext)
 	appContext.buildDaos()
 	appContext.buildServices()

@@ -8,7 +8,7 @@ func StartApplication(){
 }
 
 func BuildAppContext(){
-	Context = newAppContext()
+	Context = NewAppContext()
 }
 
 func startAppRouter(){
