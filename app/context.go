@@ -14,6 +14,7 @@ type appContext struct {
 	AppRouter      *routing.AppRouter
 }
 
+//todo stub para ejecutar local la api y hacer pruebas
 func NewAppContext() appContext{
 	appContext := new(appContext)
 	appContext.buildDaos()

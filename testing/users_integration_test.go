@@ -29,5 +29,4 @@ func TestCreateUserUserService(t *testing.T){
 	assert.Nil(t, error)
 
 	assert.True(t, len(id)>0)
-
 }

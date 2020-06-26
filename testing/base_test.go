@@ -7,11 +7,11 @@ import (
 	"testing"
 )
 
-/**esta funcion se puede ejecutar por paquete o test de manera que podriamos paralelizar la ejecución
+/**esta funcion se puede ejecutar por paquete o test de manera que  podemos paralelizar la ejecución
 de los test funcionales o de integración haciendo que cada uno levante un contexto propio*/
 /**
 cada test podría levantar su contexto
-cada test puede reemplazar una parte del contexto para mockear cierta parte del contexto
+cada test puede reemplazar una parte del contexto para mockear cierta parte
 y hacer test de integración entre ciertas capas
  */
 
