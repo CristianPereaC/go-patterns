@@ -1,4 +1,4 @@
-package web_views
+package business_dto
 
 type PrivateUserDto struct {
 	Id string `json:"id"`

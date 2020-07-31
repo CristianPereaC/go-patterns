@@ -3,7 +3,7 @@ package testing_parallel
 import (
 	"fmt"
 	"github.com/Cristien/go-patterns/app"
-	"github.com/Cristien/go-patterns/web/web_request"
+	"github.com/Cristien/go-patterns/http_handler/web_request"
 	"github.com/stretchr/testify/assert"
 	"net/http"
 	"net/http/httptest"

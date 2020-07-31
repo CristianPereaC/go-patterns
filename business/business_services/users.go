@@ -2,13 +2,19 @@ package business_services
 
 import (
 	"github.com/Cristien/go-patterns/business/business_domain"
-	"github.com/Cristien/go-patterns/web/web_request"
-	"github.com/Cristien/go-patterns/web/web_views"
+	"github.com/Cristien/go-patterns/business/business_dto"
 )
 
 const (
 	DEFAULT_USER_ID = ""
 )
+
+/* Service definition */
+type UserService interface {
+	CreateUser(request business_dto.CreateUserRequest) (id string, err error)
+	GetPrivateUser(id string) (*business_dto.PrivateUserDto)
+	GetPublicUser(id string) (*business_dto.PublicUserDto)
+}
 
 type userServiceImpl struct {
 	userDao UserDao
@@ -20,7 +26,7 @@ func NewUserServiceInstance(userDao UserDao) userServiceImpl {
 	}
 }
 
-func (u userServiceImpl) CreateUser(request web_request.CreateUserRequest) (id string, err error) {
+func (u userServiceImpl) CreateUser(request business_dto.CreateUserRequest) (id string, err error) {
 	//Generar objeto de negocio - obtención de id
 	user := business_domain.NewUser(request)
 	//convertir a dto
@@ -35,7 +41,7 @@ func (u userServiceImpl) CreateUser(request web_request.CreateUserRequest) (id s
 
 }
 
-func (u userServiceImpl) GetPrivateUser(id string) (*web_views.PrivateUserDto) {
+func (u userServiceImpl) GetPrivateUser(id string) (*business_dto.PrivateUserDto) {
 	userDb := u.userDao.GetUser(id)
 	if userDb == nil {
 		return nil
@@ -46,7 +52,7 @@ func (u userServiceImpl) GetPrivateUser(id string) (*web_views.PrivateUserDto) {
 
 }
 
-func (u userServiceImpl) GetPublicUser(id string) (*web_views.PublicUserDto) {
+func (u userServiceImpl) GetPublicUser(id string) (*business_dto.PublicUserDto) {
 	userDb := u.userDao.GetUser(id)
 	if userDb == nil {
 		return nil

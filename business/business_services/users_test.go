@@ -3,8 +3,6 @@ package business_services
 import (
 	"errors"
 	"github.com/Cristien/go-patterns/business/business_dto"
-	"github.com/Cristien/go-patterns/web/web_request"
-	"github.com/Cristien/go-patterns/web/web_views"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
@@ -15,7 +13,7 @@ func TestWhenCreateUserAndDaoFailsThenError(t *testing.T) {
 		return nil, errors.New("error creating user")
 	}
 	service := NewUserServiceInstance(dao)
-	request := web_request.CreateUserRequest{
+	request := business_dto.CreateUserRequest{
 		FirstName: "Juan",
 		LastName: "Perez",
 		Email: "pepe@pepe.com",
@@ -41,7 +39,7 @@ func TestWhenCreateUserSuccessfulThenUserHasId(t *testing.T) {
 		return &userDb, nil
 	}
 	service := NewUserServiceInstance(dao)
-	request := web_request.CreateUserRequest{
+	request := business_dto.CreateUserRequest{
 		FirstName: "Juan",
 		LastName: "Perez",
 		Email: "pepe@pepe.com",
@@ -77,7 +75,7 @@ func TestWhenGetPrivateUserAndUserExistThenUser(t *testing.T){
 	}
 	service := NewUserServiceInstance(dao)
 	privateUser := service.GetPrivateUser("214")
-	expectedPrivateUser := web_views.PrivateUserDto{
+	expectedPrivateUser := business_dto.PrivateUserDto{
 		Id: "214",
 		FirstName: "Juan",
 		LastName: "Perez",
@@ -110,7 +108,7 @@ func TestWhenGetPublicUserAndUserExistThenUser(t *testing.T){
 	}
 	service := NewUserServiceInstance(dao)
 	privateUser := service.GetPublicUser("214")
-	expectedPrivateUser := web_views.PublicUserDto{
+	expectedPrivateUser := business_dto.PublicUserDto{
 		Id: "214",
 		FirstName: "Juan",
 		LastName: "Perez",

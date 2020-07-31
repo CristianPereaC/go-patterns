@@ -1,8 +1,6 @@
 package business_domain
 
 import (
-	"github.com/Cristien/go-patterns/web/web_views"
-	"github.com/Cristien/go-patterns/web/web_request"
 	"github.com/Cristien/go-patterns/business/business_dto"
 	"github.com/google/uuid"
 	"time"
@@ -10,8 +8,8 @@ import (
 
 //TODO separar esto implementando el patron builder
 
-func NewPrivateUserDto(user User) web_views.PrivateUserDto {
-	return web_views.PrivateUserDto{
+func NewPrivateUserDto(user User) business_dto.PrivateUserDto {
+	return business_dto.PrivateUserDto{
 		Id: user.Id,
 		FirstName: user.FirstName,
 		LastName: user.LastName,
@@ -20,8 +18,8 @@ func NewPrivateUserDto(user User) web_views.PrivateUserDto {
 	}
 }
 
-func NewPublicUserDto(user User) web_views.PublicUserDto {
-	return web_views.PublicUserDto{
+func NewPublicUserDto(user User) business_dto.PublicUserDto {
+	return business_dto.PublicUserDto{
 		Id: user.Id,
 		FirstName: user.FirstName,
 		LastName: user.LastName,
@@ -29,7 +27,7 @@ func NewPublicUserDto(user User) web_views.PublicUserDto {
 }
 
 
-func NewUser(request web_request.CreateUserRequest) User{
+func NewUser(request business_dto.CreateUserRequest) User{
 	currentTime := time.Now().String()
 	return User{
 		Id: uuid.New().String(),

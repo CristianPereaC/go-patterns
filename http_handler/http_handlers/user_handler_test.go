@@ -2,8 +2,9 @@ package http_handlers
 
 import (
 	"encoding/json"
-	"github.com/Cristien/go-patterns/web/http_utils"
-	"github.com/Cristien/go-patterns/web/web_views"
+	"github.com/Cristien/go-patterns/business/business_dto"
+	"github.com/Cristien/go-patterns/business/business_services"
+	"github.com/Cristien/go-patterns/http_handler/http_utils"
 	"github.com/stretchr/testify/assert"
 	"net/http"
 	"testing"
@@ -14,9 +15,9 @@ Unit test
  */
 func TestUserHandlerImpl_GetPublicUser(t *testing.T) {
 
-	userServiceMock := NewUserServiceMockInstance()
-	userServiceMock.HandleGetPublicUser = func() *web_views.PublicUserDto {
-		dto := web_views.PublicUserDto{
+	userServiceMock := business_services.NewUserServiceMockInstance()
+	userServiceMock.HandleGetPublicUser = func() *business_dto.PublicUserDto {
+		dto := business_dto.PublicUserDto{
 			Id: "1234",
 			FirstName: "Juan",
 			LastName: "Perez",

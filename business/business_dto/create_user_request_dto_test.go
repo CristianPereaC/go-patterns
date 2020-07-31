@@ -1,4 +1,4 @@
-package web_request
+package business_dto
 
 import (
 	"github.com/stretchr/testify/assert"

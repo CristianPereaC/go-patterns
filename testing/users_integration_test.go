@@ -2,7 +2,7 @@ package testing
 
 import (
 	"github.com/Cristien/go-patterns/app"
-	"github.com/Cristien/go-patterns/web/web_request"
+	"github.com/Cristien/go-patterns/business/business_dto"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
@@ -17,7 +17,7 @@ func TestCreateUserUserService(t *testing.T){
 
 	service := app.Context.ServiceContext.UserService
 
-	request := web_request.CreateUserRequest{
+	request := business_dto.CreateUserRequest{
 		FirstName:"Juan",
 		LastName: "Perez",
 		Email: "pepe@pepe.com",

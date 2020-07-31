@@ -2,8 +2,8 @@ package business_domain
 
 import (
 	"github.com/Cristien/go-patterns/business/business_dto"
-	"github.com/Cristien/go-patterns/web/web_views"
-	"github.com/Cristien/go-patterns/web/web_request"
+	"github.com/Cristien/go-patterns/http_handler/web_views"
+	"github.com/Cristien/go-patterns/http_handler/web_request"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
@@ -18,7 +18,7 @@ func TestNewPrivateUserDto(t *testing.T) {
 		LastUpdateDate: "12-12-2020",
 		Password: "1234",
 	}
-	expectedPrivateUser := web_views.PrivateUserDto{
+	expectedPrivateUser := business_dto.PrivateUserDto{
 		Id: "123",
 		FirstName: "Juan",
 		LastName:  "Perez",
@@ -41,7 +41,7 @@ func TestNewPublicUserDtoUserDto(t *testing.T) {
 		LastUpdateDate: "12-12-2020",
 		Password: "1234",
 	}
-	expectedPublicUser := web_views.PublicUserDto{
+	expectedPublicUser := business_dto.PublicUserDto{
 		Id: "123",
 		FirstName: "Juan",
 		LastName:  "Perez",
@@ -55,7 +55,7 @@ func TestNewPublicUserDtoUserDto(t *testing.T) {
 
 func TestNewUser(t *testing.T) {
 
-	createuserRequest := web_request.CreateUserRequest{
+	createuserRequest := business_dto.CreateUserRequest{
 		FirstName: "Juan",
 		LastName: "Perez",
 		Email: "juan@perez@gmail.com",

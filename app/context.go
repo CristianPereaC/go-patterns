@@ -4,7 +4,7 @@ import (
 	"github.com/Cristien/go-patterns/business/business_services"
 	"github.com/Cristien/go-patterns/dao/memory_dao"
 	"github.com/Cristien/go-patterns/routing"
-	"github.com/Cristien/go-patterns/web/http_handlers"
+	"github.com/Cristien/go-patterns/http_handler/http_handlers"
 )
 
 type appContext struct {
@@ -29,7 +29,7 @@ type daoContext struct {
 }
 
 type serviceContext struct {
-	UserService http_handlers.UserService
+	UserService business_services.UserService
 }
 
 type handlerContext struct {
