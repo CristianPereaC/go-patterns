@@ -1,5 +1,11 @@
 package business_dto
 
+/*
+Comentar que con DD y repository pattern esto no es requerido
+pero en apis como users donde a veces el modelo difiere de la persistencia
+es mas conveniente este enfoque
+ */
+
 type UserDb struct {
 	Id string
 	FirstName string

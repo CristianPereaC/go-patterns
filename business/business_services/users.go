@@ -1,7 +1,7 @@
 package business_services
 
 import (
-	"github.com/Cristien/go-patterns/business_layer/business_domain"
+	"github.com/Cristien/go-patterns/business/business_domain"
 	"github.com/Cristien/go-patterns/web/web_request"
 	"github.com/Cristien/go-patterns/web/web_views"
 )
@@ -19,7 +19,6 @@ func NewUserServiceInstance(userDao UserDao) userServiceImpl {
 		userDao: userDao,
 	}
 }
-
 
 func (u userServiceImpl) CreateUser(request web_request.CreateUserRequest) (id string, err error) {
 	//Generar objeto de negocio - obtención de id

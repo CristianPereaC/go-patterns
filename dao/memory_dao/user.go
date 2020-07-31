@@ -2,7 +2,7 @@ package memory_dao
 
 import (
 	"errors"
-	"github.com/Cristien/go-patterns/business_layer/business_dto"
+	"github.com/Cristien/go-patterns/business/business_dto"
 )
 
 const(

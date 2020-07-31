@@ -3,7 +3,7 @@ package business_domain
 import (
 	"github.com/Cristien/go-patterns/web/web_views"
 	"github.com/Cristien/go-patterns/web/web_request"
-	"github.com/Cristien/go-patterns/business_layer/business_dto"
+	"github.com/Cristien/go-patterns/business/business_dto"
 	"github.com/google/uuid"
 	"time"
 )

@@ -2,7 +2,7 @@ package business_services
 
 import (
 	"errors"
-	"github.com/Cristien/go-patterns/business_layer/business_dto"
+	"github.com/Cristien/go-patterns/business/business_dto"
 	"github.com/Cristien/go-patterns/web/web_request"
 	"github.com/Cristien/go-patterns/web/web_views"
 	"github.com/stretchr/testify/assert"

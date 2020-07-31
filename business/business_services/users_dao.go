@@ -1,7 +1,7 @@
 package business_services
 
 import (
-	"github.com/Cristien/go-patterns/business_layer/business_dto"
+	"github.com/Cristien/go-patterns/business/business_dto"
 )
 
 type UserDao interface {

@@ -1,7 +1,7 @@
 package app
 
 import (
-	"github.com/Cristien/go-patterns/business_layer/business_services"
+	"github.com/Cristien/go-patterns/business/business_services"
 	"github.com/Cristien/go-patterns/dao/memory_dao"
 	"github.com/Cristien/go-patterns/routing"
 	"github.com/Cristien/go-patterns/web/http_handlers"
