@@ -32,7 +32,6 @@ func (u userServiceImpl) CreateUser(request web_request.CreateUserRequest) (id s
 		return DEFAULT_USER_ID, err
 	}
 	return userDb.Id, err
-
 }
 
 func (u userServiceImpl) GetPrivateUser(id string) (*web_views.PrivateUserDto) {
