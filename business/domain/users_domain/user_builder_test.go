@@ -1,7 +1,7 @@
-package business_domain
+package users_domain
 
 import (
-	"github.com/Cristien/go-patterns/business/business_dto"
+	"github.com/Cristien/go-patterns/business/data_transfer/users_data_transfer"
 	"github.com/Cristien/go-patterns/web/web_views"
 	"github.com/Cristien/go-patterns/web/web_request"
 	"github.com/stretchr/testify/assert"
@@ -24,6 +24,7 @@ func TestNewPrivateUserDto(t *testing.T) {
 		LastName:  "Perez",
 		Email: "juan@juan.com",
 		CreationDate: "12-12-2020",
+		FullName: "Perez, Juan",
 	}
 
 	privateUserDto := NewPrivateUserDto(user)
@@ -73,7 +74,7 @@ func TestNewUser(t *testing.T) {
 
 func TestNewUserFromDbDto(t *testing.T) {
 
-	userDb := business_dto.UserDb{
+	userDb := users_data_transfer.UserDb{
 		Id: "123425364",
 		FirstName: "Juan",
 		LastName: "Perez",

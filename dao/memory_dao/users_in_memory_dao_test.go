@@ -2,13 +2,13 @@ package memory_dao
 
 import (
 	"errors"
-	"github.com/Cristien/go-patterns/business/business_dto"
+	"github.com/Cristien/go-patterns/business/data_transfer/users_data_transfer"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
 func TestGivenUserDbHasInvalidDataWhenSaveUserThenInvalidDataError(t *testing.T) {
-	userDbToPersist := business_dto.UserDb{Id: "",}
+	userDbToPersist := users_data_transfer.UserDb{Id: "",}
 	dao := NewUserDaoImplInstance()
 	userDb, err := dao.SaveUser(userDbToPersist)
 	assert.Nil(t, userDb)
@@ -16,7 +16,7 @@ func TestGivenUserDbHasInvalidDataWhenSaveUserThenInvalidDataError(t *testing.T)
 }
 
 func TestWhenSaveUserForFirstTimeThenVersionIs1(t *testing.T) {
-	userDbToPersist := business_dto.UserDb{
+	userDbToPersist := users_data_transfer.UserDb{
 		Id: "12345",
 		FirstName: "Juan",
 		LastName: "Perez",
@@ -27,8 +27,8 @@ func TestWhenSaveUserForFirstTimeThenVersionIs1(t *testing.T) {
 	assert.Nil(t, err)
 }
 
-func TestGivenUserIsPersistedWhenSaveUserThenVersionIncrementdBy1(t *testing.T) {
-	userDbToPersist := business_dto.UserDb{
+func TestGivenUserIsPersistedWhenSaveUserThenCreationConflict(t *testing.T) {
+	userDbToPersist := users_data_transfer.UserDb{
 		Id: "12345",
 		FirstName: "Juan",
 		LastName: "Perez",
@@ -36,8 +36,8 @@ func TestGivenUserIsPersistedWhenSaveUserThenVersionIncrementdBy1(t *testing.T) 
 	dao := NewUserDaoImplInstance()
 	userDb, err := dao.SaveUser(userDbToPersist)
 	userDb, err = dao.SaveUser(*userDb)
-	assert.Equal(t, 2, userDb.Version)
-	assert.Nil(t, err)
+	assert.Nil(t, userDb)
+	assert.Equal(t, errors.New("User is already persisted"), err)
 }
 
 
@@ -50,7 +50,7 @@ func TestGivenUserWithId56IsNotPersistedWhenGetUserByIdThenNil(t *testing.T) {
 func TestGivenUserWithId56IsPersistedWhenGetUserByIdThenUserDbFetched(t *testing.T) {
 	userId := "56"
 	dao := NewUserDaoImplInstance()
-	userDbToPersist := business_dto.UserDb{
+	userDbToPersist := users_data_transfer.UserDb{
 		Id: userId,
 	}
 	dao.SaveUser(userDbToPersist)

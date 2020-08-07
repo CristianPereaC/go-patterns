@@ -1,8 +1,8 @@
-package business_services
+package user_services
 
 import (
 	"errors"
-	"github.com/Cristien/go-patterns/business/business_dto"
+	"github.com/Cristien/go-patterns/business/data_transfer/users_data_transfer"
 	"github.com/Cristien/go-patterns/web/web_request"
 	"github.com/Cristien/go-patterns/web/web_views"
 	"github.com/stretchr/testify/assert"
@@ -11,7 +11,7 @@ import (
 
 func TestWhenCreateUserAndDaoFailsThenError(t *testing.T) {
 	dao := newUserDaoMockInstance()
-	dao.HandleSaveUser = func() (*business_dto.UserDb, error) {
+	dao.HandleSaveUser = func() (*users_data_transfer.UserDb, error) {
 		return nil, errors.New("error creating user")
 	}
 	service := NewUserServiceInstance(dao)
@@ -29,8 +29,8 @@ func TestWhenCreateUserAndDaoFailsThenError(t *testing.T) {
 
 func TestWhenCreateUserSuccessfulThenUserHasId(t *testing.T) {
 	dao := newUserDaoMockInstance()
-	dao.HandleSaveUser = func() (*business_dto.UserDb, error) {
-		userDb := business_dto.UserDb{
+	dao.HandleSaveUser = func() (*users_data_transfer.UserDb, error) {
+		userDb := users_data_transfer.UserDb{
 			Id: "1234-1324-1324",
 			FirstName: "Juan",
 			LastName: "Perez",
@@ -55,7 +55,7 @@ func TestWhenCreateUserSuccessfulThenUserHasId(t *testing.T) {
 
 func TestWhenGetPrivateUserAndUserNotExistThenNil(t *testing.T){
 	dao := newUserDaoMockInstance()
-	dao.HandleGetUser = func() (*business_dto.UserDb) {
+	dao.HandleGetUser = func() (*users_data_transfer.UserDb) {
 		return nil
 	}
 	service := NewUserServiceInstance(dao)
@@ -65,8 +65,8 @@ func TestWhenGetPrivateUserAndUserNotExistThenNil(t *testing.T){
 
 func TestWhenGetPrivateUserAndUserExistThenUser(t *testing.T){
 	dao := newUserDaoMockInstance()
-	dao.HandleGetUser = func() (*business_dto.UserDb) {
-		userDb := business_dto.UserDb{
+	dao.HandleGetUser = func() (*users_data_transfer.UserDb) {
+		userDb := users_data_transfer.UserDb{
 			Id: "214",
 			FirstName: "Juan",
 			LastName: "Perez",
@@ -82,13 +82,14 @@ func TestWhenGetPrivateUserAndUserExistThenUser(t *testing.T){
 		FirstName: "Juan",
 		LastName: "Perez",
 		Email: "pepe@pepe.com",
+		FullName: "Perez, Juan",
 	}
 	assert.Equal(t, expectedPrivateUser, *privateUser)
 }
 
 func TestWhenGetPublicUserAndUserNotExistThenNil(t *testing.T){
 	dao := newUserDaoMockInstance()
-	dao.HandleGetUser = func() (*business_dto.UserDb) {
+	dao.HandleGetUser = func() (*users_data_transfer.UserDb) {
 		return nil
 	}
 	service := NewUserServiceInstance(dao)
@@ -98,8 +99,8 @@ func TestWhenGetPublicUserAndUserNotExistThenNil(t *testing.T){
 
 func TestWhenGetPublicUserAndUserExistThenUser(t *testing.T){
 	dao := newUserDaoMockInstance()
-	dao.HandleGetUser = func() (*business_dto.UserDb) {
-		userDb := business_dto.UserDb{
+	dao.HandleGetUser = func() (*users_data_transfer.UserDb) {
+		userDb := users_data_transfer.UserDb{
 			Id: "214",
 			FirstName: "Juan",
 			LastName: "Perez",

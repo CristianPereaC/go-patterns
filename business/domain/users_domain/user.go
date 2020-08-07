@@ -1,4 +1,6 @@
-package business_domain
+package users_domain
+
+import "fmt"
 
 /**
 Domain no tiene JSON value ya que nunca debería salir de la capa de negocio hacia otras capas
@@ -11,9 +13,12 @@ type User struct {
 	Id string
 	FirstName string
 	LastName string
-	FullName string
 	Email string
 	CreationDate string
 	LastUpdateDate string
 	Password string
+}
+
+func (u User) GetFullName() string{
+	return fmt.Sprintf("%s, %s", u.LastName, u.FirstName)
 }

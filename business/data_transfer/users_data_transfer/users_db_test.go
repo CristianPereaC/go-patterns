@@ -1,4 +1,4 @@
-package business_dto
+package users_data_transfer
 
 import (
 	"testing"

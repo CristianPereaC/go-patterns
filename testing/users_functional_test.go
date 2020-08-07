@@ -34,7 +34,6 @@ func TestGetUserFunctional(t *testing.T){
 	assert.Equal(t, http.StatusOK, response.Code)
 
 	fmt.Println(response.Body.String())
-
 }
 
 
