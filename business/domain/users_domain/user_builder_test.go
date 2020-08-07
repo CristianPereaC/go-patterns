@@ -2,8 +2,6 @@ package users_domain
 
 import (
 	"github.com/Cristien/go-patterns/business/data_transfer/users_data_transfer"
-	"github.com/Cristien/go-patterns/web/web_views"
-	"github.com/Cristien/go-patterns/web/web_request"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
@@ -18,7 +16,7 @@ func TestNewPrivateUserDto(t *testing.T) {
 		LastUpdateDate: "12-12-2020",
 		Password: "1234",
 	}
-	expectedPrivateUser := web_views.PrivateUserDto{
+	expectedPrivateUser := users_data_transfer.PrivateUserDto{
 		Id: "123",
 		FirstName: "Juan",
 		LastName:  "Perez",
@@ -42,7 +40,7 @@ func TestNewPublicUserDtoUserDto(t *testing.T) {
 		LastUpdateDate: "12-12-2020",
 		Password: "1234",
 	}
-	expectedPublicUser := web_views.PublicUserDto{
+	expectedPublicUser := users_data_transfer.PublicUserDto{
 		Id: "123",
 		FirstName: "Juan",
 		LastName:  "Perez",
@@ -56,7 +54,7 @@ func TestNewPublicUserDtoUserDto(t *testing.T) {
 
 func TestNewUser(t *testing.T) {
 
-	createuserRequest := web_request.CreateUserRequest{
+	createuserRequest := users_data_transfer.CreateUserRequest{
 		FirstName: "Juan",
 		LastName: "Perez",
 		Email: "juan@perez@gmail.com",

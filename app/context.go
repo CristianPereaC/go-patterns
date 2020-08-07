@@ -29,7 +29,7 @@ type daoContext struct {
 }
 
 type serviceContext struct {
-	UserService http_handlers.UserService
+	UserService user_services.UserService
 }
 
 type handlerContext struct {

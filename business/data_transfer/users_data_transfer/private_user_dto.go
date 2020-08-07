@@ -1,4 +1,4 @@
-package web_views
+package users_data_transfer
 
 type PrivateUserDto struct {
 	Id string `json:"id"`

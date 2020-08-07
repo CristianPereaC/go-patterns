@@ -1,23 +1,24 @@
 package http_handlers
 
 import (
-	"github.com/Cristien/go-patterns/web/web_request"
+	"github.com/Cristien/go-patterns/business/data_transfer/users_data_transfer"
+	"github.com/Cristien/go-patterns/business/services/user_services"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
 
 type userHandlerImpl struct {
-	userService UserService
+	userService user_services.UserService
 }
 
-func NewuserHandler(userService UserService) userHandlerImpl {
+func NewuserHandler(userService user_services.UserService) userHandlerImpl {
 	return userHandlerImpl{
 		userService: userService,
 	}
 }
 
 func (u userHandlerImpl) CreateUser(c *gin.Context){
-	request := new(web_request.CreateUserRequest)
+	request := new(users_data_transfer.CreateUserRequest)
 	err := c.BindJSON(request)
 
 	if err != nil || !request.IsValid(){

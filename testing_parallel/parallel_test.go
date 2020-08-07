@@ -3,7 +3,7 @@ package testing_parallel
 import (
 	"fmt"
 	"github.com/Cristien/go-patterns/app"
-	"github.com/Cristien/go-patterns/web/web_request"
+	"github.com/Cristien/go-patterns/business/data_transfer/users_data_transfer"
 	"github.com/stretchr/testify/assert"
 	"net/http"
 	"net/http/httptest"
@@ -15,7 +15,7 @@ func TestCreateUserUserServiceParallel(t *testing.T){
 	context := app.NewAppContext()
 	service := context.ServiceContext.UserService
 
-	request := web_request.CreateUserRequest{
+	request := users_data_transfer.CreateUserRequest{
 		FirstName:"Juan",
 		LastName: "Perez",
 		Email: "pepe@pepe.com",
@@ -35,7 +35,7 @@ func TestGetUserFunctionalParallel(t *testing.T){
 	context := app.NewAppContext()
 	service := context.ServiceContext.UserService
 
-	request := web_request.CreateUserRequest{
+	request := users_data_transfer.CreateUserRequest{
 		FirstName:"Juan",
 		LastName: "Perez",
 		Email: "pepe@pepe.com",

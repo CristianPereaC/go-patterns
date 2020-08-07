@@ -1,4 +1,4 @@
-package web_request
+package users_data_transfer
 
 import (
 	"github.com/stretchr/testify/assert"
